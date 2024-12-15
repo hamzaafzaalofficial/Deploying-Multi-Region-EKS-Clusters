@@ -16,6 +16,7 @@ IAM Cluster Permission.
 # Create the First Cluster
 Run the following command to create the first EKS cluster in theus-east-2region:
 
+```
 eksctl create cluster \
   --name=eks-1 \
   --version=1.27 \
@@ -27,12 +28,13 @@ eksctl create cluster \
   --nodes-max=2 \
   --nodegroup-name=eks-node-grp-2 \
   --managed
-
+```
 
 
 # Create the Second Cluster
 Then, create the second EKS cluster in a different region (us-west-1):
 
+```
 eksctl create cluster \
   --name=eks-2 \
   --version=1.27 \
@@ -45,7 +47,7 @@ eksctl create cluster \
   --nodegroup-name=eks-node-grp-2 \
   --managed \
   --vpc-cidr=10.0.0.0/24
-
+```
 ## Task 2: Configure Inter-Cluster Communication
 
 
@@ -72,18 +74,18 @@ In the pop-up dialog, click the "Yes, Accept" button.
 # Task 3: Deploy an Application Spanning Both Clusters
 
 
-kubectl config get-context
-kubectl config use-context <name of cluster> #you will use this command to switch #when deploying an application in that us-west-1 # #Cluster. 
+`kubectl config get-context`
+`kubectl config use-context <name of cluster> #you will use this command to switch #when deploying an application in that us-west-1 ##Cluster.` 
 For demonstration, let's deploy a simple Nginx deployment:
 
 On us-east-2 Cluster
-kubectl create deployment nginx --image=nginx
+`kubectl create deployment nginx --image=nginx`
 
 
 On us-west-1 Cluster
-kubectl create deployment nginx --image=nginx
+`kubectl create deployment nginx --image=nginx`
 
 # Verify Deployment
 Expose each deployment:
-kubectl expose deployment nginx --type=LoadBalancer --port=80
+`kubectl expose deployment nginx --type=LoadBalancer --port=80`
 
